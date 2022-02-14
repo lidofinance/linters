@@ -19,11 +19,21 @@ runs:
     - name: Run pylint checks
       run: pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }}
       shell: bash
+      if: ${{ always() }}
 
     - name: Run black checks
       run: black --check ${{ inputs.dirs }}
       shell: bash
+      if: ${{ always() }}
 
     - name: Run isort checks
       run: isort --check ${{ inputs.dirs }}
       shell: bash
+      if: ${{ always() }}
+
+    - uses: returntocorp/semgrep-action@v1
+      with:
+        config: >- # more at semgrep.dev/explore
+          p/security-audit
+          p/secrets
+      if: ${{ always() }}
