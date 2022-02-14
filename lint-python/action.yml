@@ -1,0 +1,38 @@
+name: 'Python linter'
+description: 'Lint python with pylint, black and isort'
+inputs:
+  dirs:
+    description: "Where is placed python code"
+    required: true
+  pylint-args:
+    description: "Additional args to pylint"
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install lint requirements
+      run: pip install pylint black isort
+      shell: bash
+
+    - name: Run pylint checks
+      run: pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }}
+      shell: bash
+      if: ${{ always() }}
+
+    - name: Run black checks
+      run: black --check ${{ inputs.dirs }}
+      shell: bash
+      if: ${{ always() }}
+
+    - name: Run isort checks
+      run: isort --check ${{ inputs.dirs }}
+      shell: bash
+      if: ${{ always() }}
+
+    - uses: returntocorp/semgrep-action@v1
+      with:
+        config: >- # more at semgrep.dev/explore
+          p/bandit
+      if: ${{ always() }}

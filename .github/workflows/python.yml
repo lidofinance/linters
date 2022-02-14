@@ -1,0 +1,40 @@
+name: Lint Python
+
+on:
+  workflow_call:
+    inputs:
+      dirs:
+        required: true
+        type: string
+      pylint-args:
+        required: false
+        type: string
+        default: ""
+      requirements-file:
+        required: false
+        type: string
+        default: "requirements.txt"
+      python-version:
+        required: false
+        type: string
+        default: "3.10.*"
+jobs:
+  python-linters:
+    name: Check python code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install requirements from ${{ inputs.requirements-file }}
+        run: pip install -r ${{ inputs.requirements-file }}
+
+      - uses: lidofinance/linters/lint-python@reuse-linters
+        with:
+          dirs: ${{ inputs.dirs }}
+          pylint-args: ${{ inputs.pylint-args }}
