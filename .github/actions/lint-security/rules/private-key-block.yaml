@@ -1,0 +1,15 @@
+rules:
+  - id: detected-private-key-block
+    patterns:
+      - pattern-regex: (-----BEGIN \w+ PRIVATE (KEY|KEY BLOCK)-----)
+    languages:
+      - regex
+    message: Private key detected. This is a sensitive credential and
+      should not be hardcoded here.
+    severity: ERROR
+    metadata:
+      category: security
+      technology:
+        - secrets
+      confidence: HIGH
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]

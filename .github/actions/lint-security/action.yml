@@ -1,0 +1,17 @@
+name: 'Security linter'
+description: 'Lint security issues via semgrep'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Copy semgrep rules to .semgrep
+      run: cp -r ${{ github.action_path }}/rules ${{ github.workspace }}/.semgrep
+      shell: bash
+
+    - name: Run semgrep security checks
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: >-
+          .semgrep
+      if: ${{ always() }}

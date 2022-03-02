@@ -1,0 +1,15 @@
+rules:
+  - id: detected-slack-webhook
+    patterns:
+      - pattern-regex: (https://hooks\\.slack\\.com/services/T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8}/[a-zA-Z0-9_]{24})
+    languages:
+      - regex
+    message: Slack webhook detected. This is a sensitive credential and
+      should not be hardcoded here.
+    severity: ERROR
+    metadata:
+      category: security
+      technology:
+        - secrets
+      confidence: HIGH
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]
