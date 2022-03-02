@@ -1,0 +1,15 @@
+rules:
+  - id: detected-google-api-key
+    patterns:
+      - pattern-regex: (AIza[0-9A-Za-z\\-_]{35})
+    languages:
+      - regex
+    message: Google API key detected. This is a sensitive credential and
+      should not be hardcoded here.
+    severity: ERROR
+    metadata:
+      category: security
+      technology:
+        - secrets
+      confidence: HIGH
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]

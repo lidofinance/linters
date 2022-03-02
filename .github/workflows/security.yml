@@ -1,0 +1,13 @@
+name: Lint Security
+
+on:
+  workflow_call:
+jobs:
+  security-linters:
+    name: Check security issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - uses: lidofinance/linters/.github/actions/lint-security@master
