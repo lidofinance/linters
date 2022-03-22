@@ -34,7 +34,7 @@ jobs:
       - name: Install requirements from ${{ inputs.requirements-file }}
         run: pip install -r ${{ inputs.requirements-file }}
 
-      - uses: lidofinance/linters/.github/actions/lint-python@${{ github.action_ref }}
+      - uses: "lidofinance/linters/.github/actions/lint-python@${{ github.action_ref }}"
         with:
           dirs: ${{ inputs.dirs }}
           pylint-args: ${{ inputs.pylint-args }}
