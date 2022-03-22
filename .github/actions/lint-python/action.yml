@@ -17,17 +17,23 @@ runs:
       shell: bash
 
     - name: Run pylint checks
-      run: pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }}
+      run: >
+        pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }} 2>stderr || 
+        echo "::error title=Pylint errors::$(cat ./stderr)"
       shell: bash
       if: ${{ always() }}
 
     - name: Run black checks
-      run: black --check ${{ inputs.dirs }}
+      run: >
+        black --check ${{ inputs.dirs }} 2>stderr || 
+        echo "::error title=Black checks failed::$(cat ./stderr)"
       shell: bash
       if: ${{ always() }}
 
     - name: Run isort checks
-      run: isort --check ${{ inputs.dirs }}
+      run: >
+        isort --check ${{ inputs.dirs }} 2>stderr || 
+        echo "::error title=ISort errors::$(cat ./stderr)"
       shell: bash
       if: ${{ always() }}
 

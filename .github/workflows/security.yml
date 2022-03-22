@@ -10,4 +10,4 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - uses: lidofinance/linters/.github/actions/lint-security@master
+      - uses: lidofinance/linters/.github/actions/lint-security@${{ github.action_ref }}
