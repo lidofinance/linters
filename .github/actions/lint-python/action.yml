@@ -18,22 +18,22 @@ runs:
 
     - name: Run pylint checks
       run: >
-        pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }} 2>stderr || 
-        echo "::error title=Pylint errors::$(cat ./stderr)"
+        pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }} &>err || 
+        echo "::error title=Pylint errors::$(cat ./err)"
       shell: bash
       if: ${{ always() }}
 
     - name: Run black checks
       run: >
-        black --check ${{ inputs.dirs }} 2>stderr || 
-        echo "::error title=Black checks failed::$(cat ./stderr)"
+        black --check ${{ inputs.dirs }} &>err || 
+        echo "::error title=Black checks failed::$(cat ./err)"
       shell: bash
       if: ${{ always() }}
 
     - name: Run isort checks
       run: >
-        isort --check ${{ inputs.dirs }} 2>stderr || 
-        echo "::error title=ISort errors::$(cat ./stderr)"
+        isort --check ${{ inputs.dirs }} &>err || 
+        echo "::error title=ISort errors::$(cat ./err)"
       shell: bash
       if: ${{ always() }}
 
