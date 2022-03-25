@@ -31,8 +31,23 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
 
+      - name: Check package manager
+        id: package_manager
+        run: > 
+          test -f ./poetry.lock && 
+          echo '::set-output name=value::poetry' || 
+          echo '::set-output name=value::pip'
+
       - name: Install requirements from ${{ inputs.requirements-file }}
+        if: ${{ steps.package_manager.outputs.value == 'pip' }}
         run: pip install -r ${{ inputs.requirements-file }}
+
+      - name: Install poetry requirements
+        if: ${{ steps.package_manager.outputs.value == 'poetry' }}
+        run: >
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - &&
+          source $HOME/.poetry/env &&
+          poetry install
 
       - uses: lidofinance/linters/.github/actions/lint-python@master
         with:

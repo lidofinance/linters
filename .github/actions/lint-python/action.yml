@@ -12,22 +12,49 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Check package manager
+      id: package_manager
+      shell: bash
+      run: > 
+        test -f ./poetry.lock && 
+        echo '::set-output name=value::poetry' || 
+        echo '::set-output name=value::pip'
+
     - name: Install lint requirements
-      run: pip install pylint black isort
+      if: ${{ steps.package_manager.outputs.value == 'pip' }}
+      run: pip install pylint==2.13.0 black==22.1.0 isort==5.10.1
+      shell: bash
+
+    - name: Install lint requirements via poetry
+      if: ${{ steps.package_manager.outputs.value == 'poetry' }}
+      run: >
+        $HOME/.poetry/bin/poetry add -D pylint==2.13.0 black==22.1.0 isort==5.10.1;
       shell: bash
 
     - name: Run pylint checks
-      run: pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }}
+      run: >
+        case ${{ steps.package_manager.outputs.value }} in
+        pip) pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
+        esac
       shell: bash
       if: ${{ always() }}
 
     - name: Run black checks
-      run: black --check ${{ inputs.dirs }}
+      run: >
+        case ${{ steps.package_manager.outputs.value }} in
+        pip) black --check ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run black --check ${{ inputs.dirs }};;
+        esac
       shell: bash
       if: ${{ always() }}
 
     - name: Run isort checks
-      run: isort --check ${{ inputs.dirs }}
+      run: >
+        case ${{ steps.package_manager.outputs.value }} in
+        pip) isort --check ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run isort --check ${{ inputs.dirs }};;
+        esac
       shell: bash
       if: ${{ always() }}
 
