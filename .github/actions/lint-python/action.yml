@@ -34,8 +34,8 @@ runs:
     - name: Run pylint checks
       run: >
         case ${{ steps.package_manager.outputs.value }} in
-        pip) pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
+        pip) pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() }}
