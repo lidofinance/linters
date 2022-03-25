@@ -22,20 +22,20 @@ runs:
 
     - name: Install lint requirements
       if: ${{ steps.package_manager.outputs.value == 'pip' }}
-      run: pip install pylint black isort
+      run: pip install pylint==2.13.0 black==22.1.0 isort==5.10.1
       shell: bash
 
     - name: Install lint requirements via poetry
       if: ${{ steps.package_manager.outputs.value == 'poetry' }}
       run: >
-        $HOME/.poetry/bin/poetry add -D pylint black isort;
+        $HOME/.poetry/bin/poetry add -D pylint==2.13.0 black==22.1.0 isort==5.10.1;
       shell: bash
 
     - name: Run pylint checks
       run: >
         case ${{ steps.package_manager.outputs.value }} in
-        pip) pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} ${{ inputs.dirs }};;
+        pip) pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} -r ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() }}
