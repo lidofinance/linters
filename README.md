@@ -1,6 +1,6 @@
 # Linters for Lido projects
 
-This is GitHub actions and workflows with linters
+This is the place where GitHub actions and workflows with linters live
 
 ### ✅ Released for now:
 
@@ -54,14 +54,22 @@ You can use it as a workflow or an action, as you wish.
 ```yaml
 jobs:
   # As a workflow
-  security:
+  python:
     uses: lidofinance/linters/.github/workflows/python.yml@master
   
   # Or as an action
-  security-action:
-    name: Check security issues
+  python-action:
+    name: Check python codestyle and security issues
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
       - uses: lidofinance/linters/.github/actions/lint-python@master
 ```
