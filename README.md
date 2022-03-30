@@ -12,6 +12,7 @@ This is the place where GitHub actions and workflows with linters live
 - 🪄 JS/TS
 - 🦀 Rust
 - 🐹 Go
+- ➕ C/C++
 - ???
 
 ### 👮 Generic Security Checks
