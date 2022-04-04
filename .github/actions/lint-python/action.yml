@@ -22,13 +22,13 @@ runs:
 
     - name: Install lint requirements
       if: ${{ steps.package_manager.outputs.value == 'pip' }}
-      run: pip install pylint==2.13.0 black==22.3.0 isort==5.10.1
+      run: pip install pylint==2.13.4 black==22.3.0 isort==5.10.1
       shell: bash
 
     - name: Install lint requirements via poetry
       if: ${{ steps.package_manager.outputs.value == 'poetry' }}
       run: >
-        $HOME/.poetry/bin/poetry add -D pylint==2.13.0 black==22.3.0 isort==5.10.1;
+        $HOME/.poetry/bin/poetry add -D pylint==2.13.4 black==22.3.0 isort==5.10.1;
       shell: bash
 
     - name: Run pylint checks
