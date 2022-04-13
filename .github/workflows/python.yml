@@ -4,8 +4,9 @@ on:
   workflow_call:
     inputs:
       dirs:
-        required: true
+        required: false
         type: string
+        default: "./"
       pylint-args:
         required: false
         type: string
