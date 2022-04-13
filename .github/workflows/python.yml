@@ -6,6 +6,7 @@ on:
       dirs:
         required: true
         type: string
+        default: "./"
       pylint-args:
         required: false
         type: string

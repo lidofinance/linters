@@ -1,9 +1,10 @@
 name: 'Python linter'
-description: 'Lint python with pylint, black and isort'
+description: 'Lint python with pylint, black, isort and semgrep/bandit'
 inputs:
   dirs:
     description: "Where is placed python code"
     required: true
+    default: "./"
   pylint-args:
     description: "Additional args to pylint"
     required: false
