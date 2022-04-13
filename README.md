@@ -6,6 +6,7 @@ This is the place where GitHub actions and workflows with linters live
 
 - 👮 Generic security checks
 - 🐍 Python
+- 🐳 Docker
 
 ### 🛠 Will be done in the future:
 
@@ -73,4 +74,23 @@ jobs:
         run: pip install -r requirements.txt
 
       - uses: lidofinance/linters/.github/actions/lint-python@master
+```
+
+### 🐳 Docker
+At the moment it's just a [hadolint](https://github.com/hadolint/hadolint) tool with default configuration.
+
+You can use it as a workflow or an action, as you wish.
+```yaml
+jobs:
+  # As a workflow
+  docker:
+    uses: lidofinance/linters/.github/workflows/docker.yml@master
+  
+  # Or as an action
+  docker-action:
+    name: Check docker issues
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lidofinance/linters/.github/actions/lint-docker@master
 ```
