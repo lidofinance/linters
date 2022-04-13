@@ -1,0 +1,13 @@
+name: Lint docker
+
+on:
+  workflow_call:
+jobs:
+  docker-linters:
+    name: Check docker issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - uses: lidofinance/linters/.github/actions/lint-docker@master
