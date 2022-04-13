@@ -6,14 +6,22 @@ on:
       dirs:
         required: true
         type: string
+        description: "What dirs should be checked"
+      working-directory:
+        required: false
+        type: string
+        default: "./"
+        description: "Python project location. Useful if your project is in repo subdir"
       pylint-args:
         required: false
         type: string
         default: ""
+        description: "Additional pylint args if required"
       requirements-file:
         required: false
         type: string
         default: "requirements.txt"
+        description: "Custom path to requirements file if required"
       python-version:
         required: false
         type: string

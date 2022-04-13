@@ -3,7 +3,7 @@ description: 'Lint dockerfile issues via hadolint'
 
 inputs:
   dockerfile:
-    description: "Where is placed dockerfile"
+    description: "Dockerfile location"
     required: false
     default: Dockerfile
 
