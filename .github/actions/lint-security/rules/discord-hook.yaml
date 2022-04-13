@@ -1,0 +1,15 @@
+rules:
+  - id: detected-discord-webhook
+    patterns:
+      - pattern-regex: (https://discord(?:app)?.com/api/webhooks/[0-9]{18}/[a-zA-Z0-9_-]+)
+    languages:
+      - regex
+    message: Discord webhook detected. This is a sensitive credential and
+      should not be hardcoded here.
+    severity: ERROR
+    metadata:
+      category: security
+      technology:
+        - secrets
+      confidence: HIGH
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]
