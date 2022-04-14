@@ -9,7 +9,10 @@ inputs:
     description: "Additional args to pylint"
     required: false
     default: ""
-
+  security-only:
+    required: false
+    default: "false"
+    description: Run only security checks
 runs:
   using: "composite"
   steps:
@@ -23,13 +26,13 @@ runs:
 
     - name: Install lint requirements
       if: ${{ steps.package_manager.outputs.value == 'pip' }}
-      run: pip install pylint==2.13.4 black==22.3.0 isort==5.10.1
+      run: pip install pylint==2.13.4 black==22.3.0 isort==5.10.1 bandit==1.7.4
       shell: bash
 
     - name: Install lint requirements via poetry
       if: ${{ steps.package_manager.outputs.value == 'poetry' }}
       run: >
-        $HOME/.poetry/bin/poetry add -D pylint==2.13.4 black==22.3.0 isort==5.10.1;
+        $HOME/.poetry/bin/poetry add -D pylint==2.13.4 black==22.3.0 isort==5.10.1 bandit==1.7.4;
       shell: bash
 
     - name: Run pylint checks
@@ -39,7 +42,7 @@ runs:
         poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() }}
+      if: ${{ always() && inputs.security-only == 'false' }}
 
     - name: Run black checks
       run: >
@@ -48,7 +51,7 @@ runs:
         poetry) $HOME/.poetry/bin/poetry run black --check ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() }}
+      if: ${{ always() && inputs.security-only == 'false' }}
 
     - name: Run isort checks
       run: >
@@ -57,10 +60,13 @@ runs:
         poetry) $HOME/.poetry/bin/poetry run isort --check ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() }}
+      if: ${{ always() && inputs.security-only == 'false' }}
 
-    - uses: returntocorp/semgrep-action@v1
-      with:
-        config: >-
-          p/bandit
+    - name: Run security checks via bandit
+      run: >
+        case ${{ steps.package_manager.outputs.value }} in
+        pip) bandit -r ${{ inputs.dirs }};;
+        poetry) $HOME/.poetry/bin/poetry run bandit -r ${{ inputs.dirs }};;
+        esac
+      shell: bash
       if: ${{ always() }}

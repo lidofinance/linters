@@ -19,6 +19,11 @@ on:
         required: false
         type: string
         default: "3.10.*"
+      security-only:
+        required: false
+        type: boolean
+        default: false
+        description: Run only security checks
 jobs:
   python-linters:
     name: Check python code
@@ -54,3 +59,4 @@ jobs:
         with:
           dirs: ${{ inputs.dirs }}
           pylint-args: ${{ inputs.pylint-args }}
+          security-only: ${{ inputs.security-only }}

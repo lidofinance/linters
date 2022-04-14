@@ -50,7 +50,7 @@ There are a several tools:
 - [Pylint](http://pylint.pycqa.org) for code style and errors
 - [Black](http://black.readthedocs.io) for autoformatting
 - [ISort](https://github.com/PyCQA/isort) for imports ordering
-- [Bandit](http://bandit.readthedocs.io) for common python security issues (via semgrep)
+- [Bandit](http://bandit.readthedocs.io) for common python security issues
 
 You can use it as a workflow or an action, as you wish.
 ```yaml
@@ -75,6 +75,14 @@ jobs:
 
       - uses: lidofinance/linters/.github/actions/lint-python@master
 ```
+
+Python workflow and action can be customized with some inputs:
+- **dirs** - specify directories with python code to be checked. Default is `./`
+- **security-only** - don't check codestyle, only security issues. Default is false
+- **pylint-args** - custom pylint options. Empty by default
+- **python-version** _(workflow only)_ - specify your python version. Default is 3.10.*
+- **requirements-file** _(workflow only)_ - requirements.txt location if you don't use poetry and has custom file location or name
+
 
 ### 🐳 Docker
 At the moment it's just a [hadolint](https://github.com/hadolint/hadolint) tool with default configuration.
