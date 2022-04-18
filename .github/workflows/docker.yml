@@ -2,6 +2,18 @@ name: Lint docker
 
 on:
   workflow_call:
+    inputs:
+      dockerfile:
+        description: "Where is placed dockerfile"
+        type: string
+        required: false
+        default: Dockerfile
+      recursive:
+        description: "Search for Dockerfiles in the nested folders"
+        type: boolean
+        required: false
+        default: true
+
 jobs:
   docker-linters:
     name: Check docker issues
@@ -11,3 +23,6 @@ jobs:
         uses: actions/checkout@v2
 
       - uses: lidofinance/linters/.github/actions/lint-docker@master
+        with:
+          dockerfile: ${{ inputs.dockerfile }}
+          recursive: ${{ inputs.recursive }}
