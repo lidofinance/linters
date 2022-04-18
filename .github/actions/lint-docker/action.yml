@@ -6,6 +6,10 @@ inputs:
     description: "Where is placed dockerfile"
     required: false
     default: Dockerfile
+  recursive:
+    description: "Search for Dockerfiles in the nested folders"
+    required: false
+    default: true
 
 runs:
   using: "composite"
@@ -14,3 +18,4 @@ runs:
   - uses: hadolint/hadolint-action@v2.0.0
     with:
       dockerfile: ${{ inputs.dockerfile }}
+      recursive: ${{ inputs.recursive }}
