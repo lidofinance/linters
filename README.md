@@ -17,14 +17,17 @@ This is the place where GitHub actions and workflows with linters live
 - ???
 
 ### 👮 Generic Security Checks
-It's [semgrep](https://semgrep.dev) with a several custom rules that detects following cases:
-- generic secrets
-- github access token
-- google api key, gcp account and oauth
-- password in url
-- private key
-- slack access token and hooks
-- telegram api key
+It's:
+- [semgrep](https://semgrep.dev) with a several custom rules that detects following cases:
+  - generic secrets
+  - github access token
+  - google api key, gcp account and oauth
+  - password in url
+  - private key
+  - slack access token and hooks
+  - telegram api key
+- [trufflehog](https://github.com/trufflesecurity/trufflehog) with the default config
+
 
 Feel free add your custom security rules if you find them useful for everyone.
 Just add a rule similarly to the [rules](.github/actions/lint-security/rules)
