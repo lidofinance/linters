@@ -6,7 +6,7 @@ runs:
   steps:
 
     - name: TruffleHog OSS
-      uses: trufflesecurity/trufflehog@v3.4.1
+      uses: lidofinance/linters/.github/actions/lint-security/trufflehog@trufflehog
       if: always()
       with:
         path: ./
