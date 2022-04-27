@@ -5,20 +5,22 @@ runs:
   using: "composite"
   steps:
 
+    - name: TruffleHog OSS
+      uses: trufflesecurity/trufflehog@v3.4.1
+      if: always()
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
+
     - name: Copy semgrep rules to .semgrep
+      if: always()
       run: cp -r ${{ github.action_path }}/rules ${{ github.workspace }}/.semgrep
       shell: bash
 
     - name: Run semgrep security checks
       uses: returntocorp/semgrep-action@v1
+      if: always()
       with:
         config: >-
           .semgrep
-      if: ${{ always() }}
-
-    - name: TruffleHog OSS
-      uses: trufflesecurity/trufflehog@v3.4.1
-      with:
-        path: ./
-        base: ${{ github.event.repository.default_branch }}
-        head: HEAD
