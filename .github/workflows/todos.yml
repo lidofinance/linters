@@ -1,0 +1,22 @@
+name: Lint TODOs absence
+
+on:
+  workflow_call:
+    inputs:
+      placeholder:
+        description: "TODOs placeholder"
+        required: false
+        type: string
+        default: "TODO "
+
+jobs:
+  todos-linter:
+    name: Check there's no TODOs in files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - uses: lidofinance/linters/.github/actions/lint-todos@master
+        with:
+          placeholder: ${{ inputs.placeholder }}
