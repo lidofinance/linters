@@ -1,0 +1,15 @@
+name: 'TODOs linter'
+description: 'Lint TODOs issues'
+
+inputs:
+  placeholder:
+    description: "TODOs placeholder"
+    required: false
+    default: "TODO "
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check template TODOs are resolved
+      shell: bash
+      run: '! grep -rin "${{ inputs.placeholder }}" ./'
