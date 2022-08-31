@@ -1,5 +1,5 @@
-name: 'Python linter'
-description: 'Lint python with pylint, black, isort and semgrep/bandit'
+name: "Python linter"
+description: "Lint python with pylint, black, isort and semgrep/bandit"
 inputs:
   dirs:
     description: "Where is placed python code"
@@ -19,7 +19,7 @@ runs:
     - name: Check package manager
       id: package_manager
       shell: bash
-      run: > 
+      run: >
         test -f ./poetry.lock && 
         echo '::set-output name=value::poetry' || 
         echo '::set-output name=value::pip'
@@ -32,14 +32,14 @@ runs:
     - name: Install lint requirements via poetry
       if: ${{ steps.package_manager.outputs.value == 'poetry' }}
       run: >
-        $HOME/.poetry/bin/poetry add -D pylint==2.13.4 black==22.3.0 isort==5.10.1 bandit==1.7.4;
+        poetry add -G dev pylint==2.13.4 black==22.3.0 isort==5.10.1 bandit==1.7.4;
       shell: bash
 
     - name: Run pylint checks
       run: >
         case ${{ steps.package_manager.outputs.value }} in
         pip) pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
+        poetry) poetry run pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() && inputs.security-only == 'false' }}
@@ -48,7 +48,7 @@ runs:
       run: >
         case ${{ steps.package_manager.outputs.value }} in
         pip) black --check ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run black --check ${{ inputs.dirs }};;
+        poetry) poetry run black --check ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() && inputs.security-only == 'false' }}
@@ -57,7 +57,7 @@ runs:
       run: >
         case ${{ steps.package_manager.outputs.value }} in
         pip) isort --check ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run isort --check ${{ inputs.dirs }};;
+        poetry) poetry run isort --check ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() && inputs.security-only == 'false' }}
@@ -66,7 +66,7 @@ runs:
       run: >
         case ${{ steps.package_manager.outputs.value }} in
         pip) bandit -r ${{ inputs.dirs }};;
-        poetry) $HOME/.poetry/bin/poetry run bandit -r ${{ inputs.dirs }};;
+        poetry) poetry run bandit -r ${{ inputs.dirs }};;
         esac
       shell: bash
       if: ${{ always() }}

@@ -33,13 +33,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python ${{ inputs.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version }}
 
       - name: Check package manager
         id: package_manager
-        run: > 
+        run: >
           test -f ./poetry.lock && 
           echo '::set-output name=value::poetry' || 
           echo '::set-output name=value::pip'
@@ -52,7 +52,6 @@ jobs:
         if: ${{ steps.package_manager.outputs.value == 'poetry' }}
         run: >
           curl -sSL https://install.python-poetry.org | python - &&
-          source $HOME/.poetry/env &&
           poetry install
 
       - uses: lidofinance/linters/.github/actions/lint-python@master
