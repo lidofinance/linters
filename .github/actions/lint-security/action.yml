@@ -1,6 +1,9 @@
 name: 'Security linter'
 description: 'Lint security issues via semgrep'
-
+inputs:
+  languages:
+    required: false
+    description: The languages to be analysed
 runs:
   using: "composite"
   steps:
@@ -28,6 +31,8 @@ runs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       if: ${{ always() && !github.event.repository.private }}
+      with:
+        languages: ${{ inputs.languages }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2

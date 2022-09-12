@@ -2,6 +2,10 @@ name: Lint Security
 
 on:
   workflow_call:
+    inputs:
+      languages:
+        required: false
+        type: string
 jobs:
   security-linters:
     name: Check security issues
@@ -12,4 +16,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: lidofinance/linters/.github/actions/lint-security@master
+      - uses: lidofinance/linters/.github/actions/lint-security@codeql-languages
+        with:
+          languages: ${{ inputs.languages }}
