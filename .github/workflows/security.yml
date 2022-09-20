@@ -16,6 +16,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: lidofinance/linters/.github/actions/lint-security@codeql-languages
+      - uses: lidofinance/linters/.github/actions/lint-security@master
         with:
           languages: ${{ inputs.languages }}

@@ -1,0 +1,19 @@
+name: 'Actions linter'
+description: 'Lint GitHub Actions issues'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Add actionlint matcher
+      run: |
+        echo "::add-matcher::${{ github.action_path }}/actionlint-matcher.json"
+      shell: bash
+
+    - name: Run Actionlint
+      shell: bash
+      run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) &&
+           ./actionlint -color -verbose .github/workflows/*
+
+    - name: Check github workflow yaml files validity
+      shell: bash
+      run: npx v8r@latest ".github/workflows/*"
