@@ -12,8 +12,8 @@ runs:
     - name: Run Actionlint
       shell: bash
       run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) &&
-           ./actionlint -color -verbose .github/workflows/*
+           ./actionlint -color -verbose
 
     - name: Check github workflow yaml files validity
       shell: bash
-      run: npx v8r@latest ".github/workflows/*"
+      run: npx v8r@latest ".github/**/*" --ignore-errors

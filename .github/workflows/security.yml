@@ -6,6 +6,11 @@ on:
       languages:
         required: false
         type: string
+      skip-codeql:
+        required: false
+        default: false
+        type: boolean
+        description: Skip codeql if repo has not contain any supported languages
 jobs:
   security-linters:
     name: Check security issues

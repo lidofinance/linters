@@ -9,7 +9,7 @@ inputs:
   recursive:
     description: "Search for Dockerfiles in the nested folders"
     required: false
-    default: true
+    default: "true"
 
 runs:
   using: "composite"

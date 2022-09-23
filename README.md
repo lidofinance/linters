@@ -138,13 +138,13 @@ You can use it as a workflow or an action, as you wish.
 jobs:
   # As a workflow
   docker:
-    uses: lidofinance/linters/.github/workflows/docker.yml@master
+    uses: lidofinance/linters/.github/workflows/actions.yml@master
   
   # Or as an action
-  docker-action:
-    name: Check docker issues
+  actions:
+    name: Check GitHub Actions issues
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: lidofinance/linters/.github/actions/lint-docker@master
+      - uses: lidofinance/linters/.github/actions/lint-actions@master
 ```
