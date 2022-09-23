@@ -24,3 +24,4 @@ jobs:
       - uses: lidofinance/linters/.github/actions/lint-security@master
         with:
           languages: ${{ inputs.languages }}
+          skip-codeql: ${{ inputs.skip-codeql }}
