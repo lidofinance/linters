@@ -4,6 +4,10 @@ inputs:
   languages:
     required: false
     description: The languages to be analysed
+  skip-codeql:
+    required: false
+    default: 'false'
+    description: Skip codeql if repo has not contain any supported languages
 runs:
   using: "composite"
   steps:
@@ -30,10 +34,10 @@ runs:
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
-      if: ${{ always() && !github.event.repository.private }}
+      if: ${{ always() && !github.event.repository.private && github.event.inputs.skip-codeql == 'false' }}
       with:
         languages: ${{ inputs.languages }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-      if: ${{ always() && !github.event.repository.private }}
+      if: ${{ always() && !github.event.repository.private && github.event.inputs.skip-codeql == 'false' }}

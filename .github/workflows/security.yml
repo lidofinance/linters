@@ -6,6 +6,11 @@ on:
       languages:
         required: false
         type: string
+      skip-codeql:
+        required: false
+        default: false
+        type: boolean
+        description: Skip codeql if repo has not contain any supported languages
 jobs:
   security-linters:
     name: Check security issues
@@ -16,6 +21,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: lidofinance/linters/.github/actions/lint-security@codeql-languages
+      - uses: lidofinance/linters/.github/actions/lint-security@master
         with:
           languages: ${{ inputs.languages }}
+          skip-codeql: ${{ inputs.skip-codeql }}

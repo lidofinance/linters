@@ -7,6 +7,8 @@ This is the place where GitHub actions and workflows with linters live
 - 👮 Generic security checks
 - 🐍 Python
 - 🐳 Docker
+- 🚀 GitHub Actions
+- ✅ TODOs
 
 ### 🛠 Will be done in the future:
 
@@ -15,6 +17,28 @@ This is the place where GitHub actions and workflows with linters live
 - 🐹 Go
 - ➕ C/C++
 - ???
+
+## Minimal recommended workflow
+This is workflow with 80% efficiency and 20% effort to implement it. 
+Just copy it to `.github/workflows` directory in your project and get at least security checks
+```yaml
+name: Static Checks
+
+on: push
+
+jobs:
+  security:
+    uses: lidofinance/linters/.github/workflows/security.yml@master
+  actions:
+    uses: lidofinance/linters/.github/workflows/actions.yml@master
+  docker:
+    uses: lidofinance/linters/.github/workflows/docker.yml@master
+  # drop next job if python is not used in your project
+  python:
+    uses: lidofinance/linters/.github/workflows/python.yml@master
+    with:
+      security-only: true
+```
 
 ### 👮 Generic Security Checks
 It's:
@@ -27,7 +51,7 @@ It's:
   - slack access token and hooks
   - telegram api key
 - [trufflehog](https://github.com/trufflesecurity/trufflehog) with the default config
-
+- [CodeQL](https://codeql.github.com) only for public repos
 
 Feel free add your custom security rules if you find them useful for everyone.
 Just add a rule similarly to the [rules](.github/actions/lint-security/rules)
@@ -104,4 +128,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: lidofinance/linters/.github/actions/lint-docker@master
+```
+
+### 🚀 GitHub Actions
+Either [actionlint](https://github.com/rhysd/actionlint) and [v8r](https://github.com/chris48s/v8r) used
+
+You can use it as a workflow or an action, as you wish.
+```yaml
+jobs:
+  # As a workflow
+  docker:
+    uses: lidofinance/linters/.github/workflows/actions.yml@master
+  
+  # Or as an action
+  actions:
+    name: Check GitHub Actions issues
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lidofinance/linters/.github/actions/lint-actions@master
 ```
