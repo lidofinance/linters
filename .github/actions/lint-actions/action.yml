@@ -9,10 +9,10 @@ runs:
         echo "::add-matcher::${{ github.action_path }}/actionlint-matcher.json"
       shell: bash
 
-    - name: Run Actionlint
-      shell: bash
-      run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) &&
-           ./actionlint -color -verbose
+#    - name: Run Actionlint
+#      shell: bash
+#      run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) &&
+#           ./actionlint -color -verbose
 
     - name: Check github workflow yaml files validity
       shell: bash
