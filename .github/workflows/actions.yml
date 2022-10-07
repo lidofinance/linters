@@ -7,8 +7,6 @@ jobs:
   actions-linter:
     name: Check GitHub Actions issues
     runs-on: ubuntu-latest
-    container:
-      image: rhysd/actionlint@sha256:5e9788d7f97104f7a30ba5435181046902b4d6f21678071362a7f7f241049ff4
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2

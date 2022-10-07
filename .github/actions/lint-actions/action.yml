@@ -2,17 +2,6 @@ name: 'Actions linter'
 description: 'Lint GitHub Actions issues'
 
 runs:
-  using: "composite"
-  steps:
-    - name: Add actionlint matcher
-      run: |
-        echo "::add-matcher::${{ github.action_path }}/actionlint-matcher.json"
-      shell: bash
-
-    - name: Run Actionlint
-      shell: bash
-      run: actionlint -color -verbose
-
-    - name: Check github workflow yaml files validity
-      shell: bash
-      run: npx v8r@0.13.0 ".github/**/*" --ignore-errors
+  using: docker
+  image: Dockerfile
+  entrypoint: ./run.sh
