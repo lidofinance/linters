@@ -68,7 +68,7 @@ jobs:
     name: Check security issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: lidofinance/linters/.github/actions/lint-security@master
 ```
 
@@ -91,9 +91,9 @@ jobs:
     name: Check python codestyle and security issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
@@ -126,7 +126,7 @@ jobs:
     name: Check docker issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: lidofinance/linters/.github/actions/lint-docker@master
 ```
 
@@ -145,6 +145,6 @@ jobs:
     name: Check GitHub Actions issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: lidofinance/linters/.github/actions/lint-actions@master
 ```
