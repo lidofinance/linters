@@ -42,7 +42,7 @@ runs:
         poetry) poetry run pylint ${{ inputs.pylint-args }} --recursive y ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() && inputs.security-only == 'false' }}
+      if: ${{ always() && inputs.security-only == false }}
 
     - name: Run black checks
       run: >
@@ -51,7 +51,7 @@ runs:
         poetry) poetry run black --check ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() && inputs.security-only == 'false' }}
+      if: ${{ always() && inputs.security-only == false }}
 
     - name: Run isort checks
       run: >
@@ -60,7 +60,7 @@ runs:
         poetry) poetry run isort --check ${{ inputs.dirs }};;
         esac
       shell: bash
-      if: ${{ always() && inputs.security-only == 'false' }}
+      if: ${{ always() && inputs.security-only == false }}
 
     - name: Run security checks via bandit
       run: >
