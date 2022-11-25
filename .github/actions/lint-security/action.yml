@@ -34,10 +34,10 @@ runs:
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
-      if: ${{ always() && !github.event.repository.private && github.event.inputs.skip-codeql == false }}
+      if: ${{ always() && !github.event.repository.private && inputs.skip-codeql == 'false' }}
       with:
         languages: ${{ inputs.languages }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-      if: ${{ always() && !github.event.repository.private && github.event.inputs.skip-codeql == false }}
+      if: ${{ always() && !github.event.repository.private && inputs.skip-codeql == 'false' }}
