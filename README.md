@@ -131,7 +131,7 @@ jobs:
 ```
 
 ### 🚀 GitHub Actions
-Either [actionlint](https://github.com/rhysd/actionlint) and [v8r](https://github.com/chris48s/v8r) used
+[actionlint](https://github.com/rhysd/actionlint) used
 
 You can use it as a workflow or an action, as you wish.
 ```yaml
