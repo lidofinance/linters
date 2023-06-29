@@ -12,4 +12,4 @@ runs:
   steps:
     - name: Check template TODOs are resolved
       shell: bash
-      run: '! grep -rin "${{ inputs.placeholder }}" ./'
+      run: '! grep -rin --exclude-dir=.git "${{ inputs.placeholder }}" ./'
