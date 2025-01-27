@@ -33,11 +33,11 @@ runs:
           .semgrep
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@6e4b8622b82fab3c6ad2a7814fad1effc7615bc8 # v3.28.4
+      uses: github/codeql-action/init@ee117c905ab18f32fa0f66c2fe40ecc8013f3e04 # v3.28.4
       if: ${{ always() && !github.event.repository.private && inputs.skip-codeql == 'false' }}
       with:
         languages: ${{ inputs.languages }}
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@6e4b8622b82fab3c6ad2a7814fad1effc7615bc8 # v3.28.4
+      uses: github/codeql-action/analyze@ee117c905ab18f32fa0f66c2fe40ecc8013f3e04 # v3.28.4
       if: ${{ always() && !github.event.repository.private && inputs.skip-codeql == 'false' }}
