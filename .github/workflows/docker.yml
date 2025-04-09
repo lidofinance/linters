@@ -24,7 +24,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: lidofinance/linters/.github/actions/lint-docker@master
+      - uses: ./.github/actions/lint-docker
         with:
           dockerfile: ${{ inputs.dockerfile }}
           recursive: ${{ inputs.recursive }}

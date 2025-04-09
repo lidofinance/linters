@@ -19,6 +19,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: lidofinance/linters/.github/actions/lint-todos@master
+      - uses: ./.github/actions/lint-todos
         with:
           placeholder: ${{ inputs.placeholder }}
