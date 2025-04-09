@@ -7,5 +7,6 @@ jobs:
     uses: ./.github/workflows/security.yml
     with:
       skip-codeql: true
+
   actions:
     uses: ./.github/workflows/actions.yml

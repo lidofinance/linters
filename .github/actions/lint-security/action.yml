@@ -26,7 +26,8 @@ runs:
       shell: bash
 
     - name: Run semgrep security checks
-      uses: semgrep/semgrep-action@v1
+      # https://github.com/semgrep/semgrep-action/releases/tag/v1
+      uses: lidofinance/semgrep-action@713efdd345f3035192eaa63f56867b88e63e4e5d
       if: always()
       with:
         config: >-
