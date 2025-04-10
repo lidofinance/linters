@@ -4,9 +4,9 @@ on: push
 
 jobs:
   security:
-    uses: lidofinance/linters/github/workflows/security.yml
+    uses: ./.github/workflows/security.yml@master
     with:
       skip-codeql: true
 
   actions:
-    uses: lidofinance/linters/github/workflows/actions.yml
+    uses: ./.github/workflows/actions.yml@master
