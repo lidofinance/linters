@@ -4,9 +4,9 @@ on: push
 
 jobs:
   security:
-    uses: ./.github/workflows/security.yml@master
+    uses: ./.github/workflows/security.yml
     with:
       skip-codeql: true
 
   actions:
-    uses: ./.github/workflows/actions.yml@master
+    uses: ./.github/workflows/actions.yml
