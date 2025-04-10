@@ -14,9 +14,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-
+  - name: Lint Dockerfile
     # https://github.com/hadolint/hadolint-action/releases/tag/v2.0.0 
-  - uses: lidofinance/hadolint-action@0a6d062e780d218ea909a18365e0ab2e36d09612
+    uses: lidofinance/hadolint-action@0a6d062e780d218ea909a18365e0ab2e36d09612
     with:
       dockerfile: ${{ inputs.dockerfile }}
       recursive: ${{ inputs.recursive }}

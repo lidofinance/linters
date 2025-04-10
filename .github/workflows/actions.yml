@@ -17,4 +17,4 @@ jobs:
         with:
           node-version: 16
 
-      - uses: lidofinance/linters/.github/actions/lint-actions@fix/vendored-actions
+      - uses: lidofinance/linters/.github/actions/lint-actions@master
