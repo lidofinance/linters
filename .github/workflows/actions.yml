@@ -17,4 +17,4 @@ jobs:
         with:
           node-version: 16
 
-      - uses: ./.github/actions/lint-actions
+      - uses: hexnickk/linters/.github/actions/lint-actions@fix/vendored-actions

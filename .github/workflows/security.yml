@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: ./.github/actions/lint-security
+      - uses: hexnickk/linters/.github/actions/lint-security@fix/vendored-actions
         with:
           languages: ${{ inputs.languages }}
           skip-codeql: ${{ inputs.skip-codeql }}

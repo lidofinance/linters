@@ -24,7 +24,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/lint-docker
+      - uses: hexnickk/linters/.github/actions/lint-docker@fix/vendored-actions
         with:
           dockerfile: ${{ inputs.dockerfile }}
           recursive: ${{ inputs.recursive }}
