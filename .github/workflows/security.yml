@@ -22,7 +22,6 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-
       - uses: lidofinance/linters/.github/actions/lint-security@master
         with:
           languages: ${{ inputs.languages }}
