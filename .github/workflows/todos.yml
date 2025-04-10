@@ -19,6 +19,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: hexnickk/linters/.github/actions/lint-todos@fix/vendored-actions
+      - uses: lidofinance/linters/.github/actions/lint-todos@fix/vendored-actions
         with:
           placeholder: ${{ inputs.placeholder }}
